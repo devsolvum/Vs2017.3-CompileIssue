@@ -1,0 +1,796 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:STM.Resources;assembly=STM"
+             xmlns:controls="clr-namespace:STM.Framework.Controls;assembly=STM"
+             xmlns:converter="clr-namespace:STM.Framework.Converter;assembly=STM"
+             xmlns:extensions="clr-namespace:STM.Framework.Extensions;assembly=STM"
+             xmlns:framework="clr-namespace:STM.Framework;assembly=STM"
+             xmlns:custom="clr-namespace:STM.Views.Custom;assembly=STM"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:featurePicker="clr-namespace:STM.Framework.Controls.Spezialized.FeaturePicker;assembly=STM"
+             xmlns:utility="clr-namespace:STM.Utility;assembly=STM"
+             xmlns:security="clr-namespace:STM.Utility.Security;assembly=STM"
+             x:Class="STM.App">
+	<Application.Resources>
+		<ResourceDictionary>
+
+			<!-- Änderungen an Farben müssen auch in Resources/Colors.cs gewartet werden. -->
+			<Color x:Key="PrimaryColor">#DD424C</Color>
+			<Color x:Key="PrimaryDarkColor">#DF111C</Color>
+			<Color x:Key="PrimaryLightColor">#F0AAAC</Color>
+			<Color x:Key="CommentColor">#228B22</Color>
+			<Color x:Key="SecondaryColor">#A6A6A6</Color>
+			<Color x:Key="PrimaryTextColor">#212121</Color>
+			<Color x:Key="SecondaryTextColor">#757575</Color>
+			<Color x:Key="IconColor">#FFFFFF</Color>
+			<Color x:Key="InactiveIconColor">#dddddd</Color>
+			<Color x:Key="DividerColor">#BDBDBD</Color>
+			<Color x:Key="WarningColor">#ff0000</Color>
+			<Color x:Key="PageBackgroundColor">#E5E5E5</Color>
+
+			<OnPlatform x:Key="ControlBackgroundColor" x:TypeArguments="Color">
+				<On Platform="Android" Value="Transparent"></On>
+				<On Platform="WinPhone" Value="White"></On>
+				<On Platform="iOS" Value="White"></On>
+			</OnPlatform>
+
+			<x:Double x:Key="DoubleDefaultThickness">12</x:Double>
+			<x:Double x:Key="DoubleDefaultThicknessHalfed">6</x:Double>
+			<x:Double x:Key="DoubleDateFieldInputWidth">130</x:Double>
+			<GridLength x:Key="GridLengthDefaultThickness">12</GridLength>
+
+			<Thickness x:Key="TappableThicknessTop" Top="{StaticResource DoubleDefaultThickness}" Left="0" Right="0" Bottom="0" />
+			<Thickness x:Key="TappableThicknessBottom" Top="0" Left="0" Right="0" Bottom="{StaticResource DoubleDefaultThickness}" />
+			<Thickness x:Key="TappableThicknessLeft" Top="0" Left="{StaticResource DoubleDefaultThickness}" Right="0" Bottom="0" />
+			<Thickness x:Key="TappableThicknessRight" Top="0" Left="0" Right="{StaticResource DoubleDefaultThickness}"
+			           Bottom="0" />
+			<Thickness x:Key="TappableThicknessLeftRight" Top="0" Left="{StaticResource DoubleDefaultThickness}"
+			           Right="{StaticResource DoubleDefaultThickness}" Bottom="0" />
+
+			<x:Double x:Key="DoubleDefaultFontSize">18</x:Double>
+			<x:Double x:Key="FontSizeVeryLarge">24</x:Double>
+
+			<Thickness x:Key="NavigationViewHeaderThickness"
+			           Top="13"
+			           Left="{StaticResource DoubleDefaultThickness}"
+			           Right="{StaticResource DoubleDefaultThickness}"
+			           Bottom="13" />
+			
+			<Thickness x:Key="TappableThickness"
+			           Top="{StaticResource DoubleDefaultThickness}"
+			           Left="{StaticResource DoubleDefaultThickness}"
+			           Right="{StaticResource DoubleDefaultThickness}"
+			           Bottom="{StaticResource DoubleDefaultThickness}" />
+
+			<Thickness x:Key="TappableThicknessLeftRightWithTopBottomHalfed"
+			           Top="{StaticResource DoubleDefaultThicknessHalfed}"
+			           Left="{StaticResource DoubleDefaultThickness}"
+			           Right="{StaticResource DoubleDefaultThickness}"
+			           Bottom="{StaticResource DoubleDefaultThicknessHalfed}" />
+
+			<Thickness x:Key="TappableThicknessNoLeftRightWithTopBottomHalfed"
+			           Top="{StaticResource DoubleDefaultThicknessHalfed}"
+			           Left="0"
+			           Right="0"
+			           Bottom="{StaticResource DoubleDefaultThicknessHalfed}" />
+
+			<converter:BooleanToGridLengthConverter x:Key="BooleanToGridLengthConverter" />
+			<converter:ListCountToBoolConverter x:Key="ListCountToBoolConverter" />
+			<converter:StringToNumberConverter x:Key="StringToNumberConverter" />
+			<converter:StringIsNullOrEmptyToBooleanConverter x:Key="StringIsNullOrEmptyToBooleanConverter" />
+			<converter:StringIsNotNullOrEmptyToBooleanConverter x:Key="StringIsNotNullOrEmptyToBooleanConverter" />
+			<converter:SiteIntToImageConverter x:Key="SiteIntToImageConverter" />
+			<converter:UriConverterBase x:Key="UriConverter" />
+			<converter:BooleanInversionConverter x:Key="BooleanInversionConverter" />
+			<converter:IfEqualsAnyParameterConverter x:Key="IfEqualsAnyParameterConverter" />
+			<converter:DateConverter x:Key="DateConverter" />
+			<converter:DateDurationTypeConverter x:Key="DateDurationTypeConverter" />
+			<converter:GreaterThanConverter x:Key="GreaterThanConverter" />
+			<converter:ToStringConverter x:Key="ToStringConverter" />
+
+			<converter:IsNullToBoolConverter x:Key="NullToBoolConverter" />
+			<framework:EqualsConverter x:Key="EqualsConverter" />
+			<framework:MaxedPercentSizeValueConverter x:Key="MaxedPercentSizeValueConverter" />
+			<framework:MaxedPercentSize x:Key="MaxedPercentSizeDefaultDrawer">
+				<framework:MaxedPercentSize.PercentSize>70</framework:MaxedPercentSize.PercentSize>
+				<framework:MaxedPercentSize.MaxedSize>600</framework:MaxedPercentSize.MaxedSize>
+			</framework:MaxedPercentSize>
+			
+
+			<Style x:Key="ContentViewTappableLabel" TargetType="ContentView">
+				<Setter Property="BackgroundColor" Value="{StaticResource PrimaryDarkColor}" />
+				<Setter Property="Padding" Value="{StaticResource TappableThickness}" />
+			</Style>
+
+			<Style TargetType="ContentPage">
+				<Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
+			</Style>
+
+			<Style TargetType="Label">
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+			</Style>
+
+			<Style x:Key="PrimaryText" TargetType="Label">
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+			</Style>
+
+			<Style x:Key="PrimaryTextSmall" TargetType="Label" BasedOn="{StaticResource PrimaryText}">
+				<Setter Property="FontSize" Value="12" />
+			</Style>
+
+			<Style x:Key="PrimaryTextBig" TargetType="Label" BasedOn="{StaticResource PrimaryText}">
+				<Setter Property="FontSize" Value="18" />
+			</Style>
+
+			<Style x:Key="SecondaryText" TargetType="Label">
+				<Setter Property="TextColor" Value="{StaticResource PrimaryText}" />
+			</Style>
+
+			<Style x:Key="SecondaryTextSmall" TargetType="Label" BasedOn="{StaticResource SecondaryText}">
+				<Setter Property="FontSize" Value="12" />
+			</Style>
+
+			<Style x:Key="SecondaryTextBig" TargetType="Label" BasedOn="{StaticResource SecondaryText}">
+				<Setter Property="FontSize" Value="18" />
+			</Style>
+
+			<Style TargetType="SearchBar">
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+			</Style>
+
+			<Style TargetType="ImageCell">
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+				<Setter Property="DetailColor" Value="{StaticResource PrimaryTextColor}" />
+			</Style>
+
+			<Style x:Key="LabelDarkBig" TargetType="Label">
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+				<Setter Property="FontAttributes" Value="Bold" />
+				<Setter Property="FontSize" Value="18" />
+			</Style>
+
+			<Style x:Key="LabelDarkSmall" TargetType="Label" BasedOn="{StaticResource LabelDarkBig}">
+				<Setter Property="FontSize" Value="12" />
+			</Style>
+
+			<Style x:Key="LabelCommentItalic" TargetType="Label" BasedOn="{StaticResource LabelDarkSmall}">
+				<Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}" />
+				<Setter Property="FontAttributes" Value="Italic" />
+			</Style>
+
+			<Style TargetType="Label" x:Key="LabelCollapsePanel" BasedOn="{StaticResource LabelDarkBig}">
+				<Setter Property="TextColor" Value="{StaticResource IconColor}" />
+				<Setter Property="FontAttributes" Value="None" />
+			</Style>
+
+			<Style x:Key="LabelShellHeaderLine1" TargetType="Label">
+				<Setter Property="TextColor" Value="{StaticResource IconColor}" />
+				<Setter Property="FontSize" Value="20" />
+			</Style>
+
+			<Style x:Key="LabelShellHeaderLine2" TargetType="Label" BasedOn="{StaticResource LabelShellHeaderLine1}">
+				<Setter Property="FontSize" Value="14" />
+			</Style>
+
+			<Style x:Key="LabelErrorMessage" TargetType="Label" BasedOn="{StaticResource LabelDarkBig}">
+				<Setter Property="TextColor" Value="Red" />
+			</Style>
+
+			<Style TargetType="Button" x:Key="ButtonProjectActionOverviewSelection">
+				<Setter Property="BackgroundColor" Value="{StaticResource PrimaryDarkColor}" />
+				<Setter Property="TextColor" Value="{StaticResource IconColor}" />
+				<Setter Property="BorderRadius" Value="10" />
+			</Style>
+
+
+
+
+			<Style TargetType="Label" x:Key="LabelDateFieldItem">
+				<Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}" />
+				<Setter Property="VerticalOptions" Value="Center" />
+			</Style>
+
+			<Style TargetType="Label" x:Key="ValueDateFieldItem">
+				<Setter Property="TextColor" Value="{StaticResource PrimaryDarkColor}" />
+				<Setter Property="VerticalOptions" Value="Center" />
+				<Setter Property="HorizontalTextAlignment" Value="Center" />
+			</Style>
+
+			<Style TargetType="Label" x:Key="ValueDateFieldItemWithMargin" BasedOn="{StaticResource ValueDateFieldItem}">
+				<Setter Property="Margin" Value="0, 0, 48, 0" />
+				<Setter Property="WidthRequest" Value="82" />
+			</Style>
+
+			<!--			<Style TargetType="Button" x:Key="ButtonThemedDark">-->
+			<!--				<Setter Property="BackgroundColor" Value="{StaticResource ColorThemeAccentDark}"></Setter>-->
+			<!--				<Setter Property="TextColor" Value="{StaticResource ColorThemeAccentDarkText}"></Setter>-->
+			<!--				<Setter Property="BorderRadius" Value="3"></Setter>-->
+			<!--			</Style>-->
+
+
+			<Style TargetType="controls:EnhancedButton" x:Key="ButtonThemedDark">
+				<Setter Property="BackgroundColor" Value="{StaticResource PrimaryDarkColor}" />
+				<Setter Property="TextColor" Value="{StaticResource IconColor}" />
+				<Setter Property="BorderRadius" Value="3" />
+				<Setter Property="Padding" Value="{StaticResource TappableThicknessLeftRight}" />
+			</Style>
+			
+			<Style TargetType="controls:EnhancedButton" x:Key="ButtonThemed">
+				<Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+				<Setter Property="TextColor" Value="{StaticResource IconColor}" />
+				<Setter Property="BorderRadius" Value="3" />
+				<Setter Property="Padding" Value="{StaticResource TappableThicknessLeftRight}" />
+			</Style>
+
+			<Style TargetType="StackLayout" x:Key="StackLayoutCardView">
+				<Setter Property="Margin" Value="20, 10, 20, 10" />
+				<Setter Property="BackgroundColor" Value="{StaticResource DividerColor}" />
+			</Style>
+
+			<Style TargetType="StackLayout" x:Key="StackLayoutInfoDateHeaderWrapper">
+				<Setter Property="Padding" Value="20, 10" />
+				<Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+			</Style>
+
+			<Style TargetType="Editor">
+				<Setter Property="BackgroundColor" Value="{StaticResource ControlBackgroundColor}" />
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+			</Style>
+
+			<Style TargetType="controls:FastListView">
+				<Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
+				<Setter Property="SeparatorColor" Value="{StaticResource DividerColor}" />
+			</Style>
+
+			<Style TargetType="DatePicker">
+				<Setter Property="BackgroundColor" Value="{StaticResource ControlBackgroundColor}" />
+				<Setter Property="MinimumDate" Value="{x:Static resources:Constants.MinDate}" />
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+			</Style>
+
+			<Style TargetType="TimePicker">
+				<Setter Property="BackgroundColor" Value="{StaticResource ControlBackgroundColor}" />
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+			</Style>
+
+			<Style TargetType="controls:BindablePicker">
+				<Setter Property="BackgroundColor" Value="{StaticResource ControlBackgroundColor}" />
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+			</Style>
+
+			<Style TargetType="Stepper">
+				<Setter Property="BackgroundColor" Value="{StaticResource ControlBackgroundColor}" />
+				<Setter Property="Minimum" Value="{x:Static resources:Constants.IntMin}" />
+				<Setter Property="Maximum" Value="{x:Static resources:Constants.IntMax}" />
+			</Style>
+
+			<Style TargetType="Entry">
+				<Setter Property="BackgroundColor" Value="{StaticResource ControlBackgroundColor}" />
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+				<Setter Property="FontSize" Value="{StaticResource DoubleDefaultFontSize}" />
+			</Style>
+
+			<Style TargetType="Switch">
+				<Setter Property="BackgroundColor" Value="{StaticResource ControlBackgroundColor}" />
+			</Style>
+
+			<Style TargetType="Grid" x:Key="GridStyleDefault">
+				<Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
+				<Setter Property="RowSpacing" Value="0" />
+				<Setter Property="ColumnSpacing" Value="0" />
+			</Style>
+
+			<Style TargetType="Grid" BasedOn="{StaticResource GridStyleDefault}" />
+
+			<Style TargetType="ActivityIndicator">
+				<Setter Property="VerticalOptions" Value="CenterAndExpand" />
+				<Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+				<Setter Property="BackgroundColor" Value="{StaticResource IconColor}" />
+			</Style>
+
+			<Style TargetType="controls:SideDrawer">
+				<Setter Property="BackgroundColor" Value="{StaticResource IconColor}" />
+				<Setter Property="IsExpandable" Value="True" />
+			</Style>
+
+			<Style TargetType="controls:ActivityIndicatorOverlay">
+				<Setter Property="BackgroundColor" Value="{StaticResource IconColor}" />
+				<Setter Property="OverlayBackgroundColor" Value="#aa000000" />
+				<Setter Property="ActivityColor">
+					<Setter.Value>
+						<OnPlatform x:TypeArguments="Color">
+							<On Platform="Android" Value="{StaticResource IconColor}" />
+							<On Platform="WinPhone" Value="{StaticResource IconColor}" />
+							<On Platform="iOS" Value="{StaticResource IconColor}" />
+						</OnPlatform>
+					</Setter.Value>
+				</Setter>
+				<Setter Property="ControlTemplate">
+					<Setter.Value>
+						<ControlTemplate>
+							<Grid BackgroundColor="{TemplateBinding BackgroundColor}">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+								<Grid Grid.Row="0">
+									<ContentPresenter Content="{TemplateBinding ContentTemplate}" />
+								</Grid>
+								<Grid Grid.Row="0" IsVisible="{TemplateBinding IsBusy}"
+								      BackgroundColor="{TemplateBinding OverlayBackgroundColor}">
+									<ActivityIndicator BackgroundColor="Transparent" IsRunning="True" Color="White" HorizontalOptions="Center"
+									                   VerticalOptions="Center" />
+								</Grid>
+							</Grid>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<Style TargetType="{x:Type controls:EnhancedLabel}" x:Key="LabelDrawerBack">
+				<Setter Property="FontSize" Value="Large" />
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+			</Style>
+			
+			<Style TargetType="{x:Type controls:EnhancedLabel}" x:Key="LabelDrawerListHeader">
+				<Setter Property="FontSize" Value="Medium" />
+				<Setter Property="FontTransform" Value="Uppercase" />
+				<Setter Property="TextColor" Value="{StaticResource IconColor}" />
+			</Style>
+			
+			<Style TargetType="{x:Type controls:EnhancedLabel}" x:Key="LabelDrawerListItem">
+				<Setter Property="FontSize" Value="Small" />
+				<Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}" />
+			</Style>
+			
+			<Style TargetType="{x:Type Label}" x:Key="LabelDrawerListHeaderSub">
+				<Setter Property="FontSize" Value="Small" />
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+			</Style>
+			
+			<Style TargetType="{x:Type controls:ImageButton}" x:Key="ImageButtonPrimaryColorIcon">
+				<Setter Property="BackgroundColor" Value="Transparent" />
+				<Setter Property="ImageTintColor" Value="{StaticResource PrimaryDarkColor}" />
+			</Style>
+			
+			<Style TargetType="{x:Type controls:ImageButton}" x:Key="ImageButtonThemedDark">
+				<Setter Property="BackgroundColor" Value="{StaticResource PrimaryDarkColor}" />
+				<Setter Property="TextColor" Value="{StaticResource IconColor}" />
+				<Setter Property="BorderRadius" Value="3" />
+				<Setter Property="ImageWidthRequest" Value="47" />
+				<Setter Property="ImageHeightRequest" Value="47" />
+			</Style>
+			
+			<Style TargetType="{x:Type controls:ImageButton}" x:Key="ImageButtonWithDisabledColor" BasedOn="{StaticResource ImageButtonThemedDark}">
+				<Setter Property="DisabledImageTintColor" Value="{StaticResource InactiveIconColor}" />
+				<Setter Property="ImageTintColor" Value="{x:Null}" />
+			</Style>
+			
+			<Style TargetType="{x:Type controls:ImageButton}" BasedOn="{StaticResource ImageButtonThemedDark}">
+			</Style>
+			
+			<Style TargetType="{x:Type controls:PopOverLayout}">
+				<Setter Property="BackgroundColor" Value="#88000000" />
+				<Setter Property="ContentBackgroundColor" Value="{StaticResource PageBackgroundColor}" />
+				<Setter Property="IsOverlayVisible" Value="False" />
+				<Setter Property="OverlayPadding">
+					<Setter.Value>
+						<OnIdiom x:TypeArguments="Thickness" Phone="0" Tablet="60">
+						</OnIdiom>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<Style TargetType="{x:Type featurePicker:PopOverFeaturePicker}">
+				<Setter Property="BorderThickness">
+					<Setter.Value>
+						<OnIdiom x:TypeArguments="Thickness" Phone="0" Tablet="1">
+						</OnIdiom>
+					</Setter.Value>
+				</Setter>
+				<Setter Property="BorderColor" Value="{StaticResource PrimaryTextColor}" />
+				<Setter Property="BackgroundColor" Value="Transparent" />
+				<Setter Property="ControlTemplate">
+					<Setter.Value>
+						<ControlTemplate>
+							<controls:PopOverLayout IsOverlayVisible="{TemplateBinding IsOpen}">
+								<controls:PopOverLayout.OverlayContent>
+									<Grid BackgroundColor="{TemplateBinding BorderColor}" Padding="{TemplateBinding BorderThickness}">
+										<Grid BackgroundColor="{StaticResource PageBackgroundColor}">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="*" />
+												<RowDefinition>
+													<RowDefinition.Height>
+														<OnIdiom x:TypeArguments="GridLength" Phone="Auto" Tablet="0">
+															<On Platform="Phone" Value="Auto"></On>
+															<On Platform="Tablet" Value="0"></On>
+														</OnIdiom>
+													</RowDefinition.Height>
+												</RowDefinition>
+											</Grid.RowDefinitions>
+											<StackLayout Orientation="Vertical" BackgroundColor="{x:Static resources:Colors.PrimaryDarkColor}">
+												<Label TextColor="{x:Static resources:Colors.IconColor}" Text="{TemplateBinding Title}"
+												       FontSize="{StaticResource FontSizeVeryLarge}" Margin="{StaticResource TappableThickness}" />
+											</StackLayout>
+											<ContentView Grid.Row="1" Padding="{StaticResource TappableThickness}" >
+												<featurePicker:FeatureItemsView 
+												BackgroundColor="{StaticResource PageBackgroundColor}" 
+												ItemsSource="{TemplateBinding ItemsSource}" 
+												SelectCommand="{TemplateBinding SelectCommand}" />
+											</ContentView>
+											<Button BorderColor="{StaticResource PrimaryDarkColor}" TextColor="{StaticResource PrimaryDarkColor}" Grid.Row="2" Text="{x:Static resources:Translations.Shared_Close}" Command="{TemplateBinding CloseTapCommand}" />
+										</Grid>
+									</Grid>
+								</controls:PopOverLayout.OverlayContent>
+								<controls:EnhancedContentPresenter Content="{TemplateBinding Content}" />
+							</controls:PopOverLayout>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<OnIdiom x:Key="ApplicationHeaderDefaultPadding" x:TypeArguments="Thickness" Phone="6" Tablet="12">
+			</OnIdiom>
+
+			<Style TargetType="{x:Type custom:ApplicationHeader}">
+				<Setter Property="HomeButtonStyle" Value="{StaticResource ButtonThemed}" />
+				<Setter Property="UseCompactModeOnMobile" Value="True" />
+				<Setter Property="FixedPadding" Value="{StaticResource ApplicationHeaderDefaultPadding}"/>
+				<Setter Property="BackgroundColor" Value="{StaticResource PrimaryDarkColor}" />
+				<Setter Property="ControlTemplate">
+					<Setter.Value>
+						<OnIdiom x:TypeArguments="ControlTemplate">
+							<OnIdiom.Phone>
+								<ControlTemplate>
+									<Grid Margin="{TemplateBinding FixedMargin}"
+									      Padding="{TemplateBinding FixedPadding}"
+									      BackgroundColor="{TemplateBinding BackgroundColor}">
+										<Grid IsVisible="{TemplateBinding UseCompactModeOnMobile}"
+											BackgroundColor="{TemplateBinding BackgroundColor}">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="*" />
+												<ColumnDefinition Width="Auto" />
+											</Grid.ColumnDefinitions>
+											<controls:ImageButton
+												Style="{StaticResource ImageButtonThemedDark}"
+												IsVisible="{TemplateBinding HomeButtonCommand, Converter={StaticResource NullToBoolConverter}, ConverterParameter={x:Static x:Boolean.TrueString}}"
+												Grid.Column="0"
+												Source="{resources:Image ContextMenu}"
+												Command="{TemplateBinding HomeButtonCommand}" />
+											<Grid Grid.Column="1" extensions:GestureExtensions.TapCommand="{TemplateBinding HeaderTapCommand}"
+											      BackgroundColor="{StaticResource PrimaryDarkColor}">
+												<Grid.RowDefinitions>
+													<RowDefinition Height="*" />
+													<RowDefinition Height="Auto" />
+													<RowDefinition Height="Auto" />
+													<RowDefinition Height="*" />
+												</Grid.RowDefinitions>
+
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="Auto" />
+													<ColumnDefinition Width="*" />
+												</Grid.ColumnDefinitions>
+
+												<Image Grid.Column="0" Grid.RowSpan="4" VerticalOptions="Center" WidthRequest="38" HeightRequest="38"
+												       extensions:GestureExtensions.TapCommand="{TemplateBinding HeaderTapCommand}"
+												       Source="{resources:Image ChevronLeft}"
+												       IsVisible="{TemplateBinding IsChevronVisible}" />
+
+												<Label Grid.Column="1" Grid.Row="1"
+												       Text="{TemplateBinding HeaderTextLine1, StringFormat='{}{0} '}"
+												       Style="{StaticResource LabelShellHeaderLine1}"
+												       IsVisible="{TemplateBinding HeaderTextLine1, Converter={StaticResource NullToBoolConverter}, ConverterParameter={x:Static x:Boolean.TrueString}}" />
+
+												<Label Grid.Column="1" Grid.Row="2"
+												       Text="{TemplateBinding HeaderTextLine2, StringFormat='{}{0} '}"
+												       Style="{StaticResource LabelShellHeaderLine2}"
+												       IsVisible="{TemplateBinding HeaderTextLine2, Converter={StaticResource NullToBoolConverter}, ConverterParameter={x:Static x:Boolean.TrueString}}" />
+											</Grid>
+											<controls:EnhancedContentPresenter
+												Grid.Column="2"
+												Content="{TemplateBinding CommandAreaContent}"
+												HorizontalOptions="End" />
+										</Grid>
+
+										<Grid BackgroundColor="{TemplateBinding BackgroundColor}" 
+											  IsVisible="{TemplateBinding UseCompactModeOnMobile, Converter={StaticResource BooleanInversionConverter}}">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto"/>
+												<RowDefinition Height="{StaticResource GridLengthDefaultThickness}" />
+												<RowDefinition Height="Auto"/>
+											</Grid.RowDefinitions>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto"/>
+												<ColumnDefinition Width="*"/>
+											</Grid.ColumnDefinitions>
+											<controls:ImageButton
+												Style="{StaticResource ImageButtonThemedDark}"
+												Grid.Row="0"
+												Grid.Column="0"
+												IsVisible="{TemplateBinding HomeButtonCommand, Converter={StaticResource NullToBoolConverter}, ConverterParameter={x:Static x:Boolean.TrueString}}"
+												Source="{resources:Image ContextMenu}"
+												Command="{TemplateBinding HomeButtonCommand}" />
+											<controls:EnhancedContentPresenter
+												Grid.Row="0"
+												Grid.Column="1"
+												HorizontalOptions="End"
+												Content="{TemplateBinding CommandAreaContent}" />
+
+											<StackLayout Orientation="Horizontal" Grid.Row="2"
+												Grid.Column="0"
+												Grid.ColumnSpan="2"
+												Margin="0"
+												Padding="0"
+												extensions:GestureExtensions.TapCommand="{TemplateBinding HeaderTapCommand}">
+
+												<Image WidthRequest="26" HeightRequest="26"
+													   VerticalOptions="Center"
+												       Source="{resources:Image ChevronLeft}"
+												       extensions:GestureExtensions.TapCommand="{TemplateBinding HeaderTapCommand}"
+												       IsVisible="{TemplateBinding IsChevronVisible}" />
+
+												<Label VerticalOptions="Center"
+												       Text="{TemplateBinding HeaderTextLine1, StringFormat='{}{0} '}"
+												       Style="{StaticResource LabelShellHeaderLine1}"
+												       IsVisible="{TemplateBinding HeaderTextLine1, Converter={StaticResource NullToBoolConverter}, ConverterParameter={x:Static x:Boolean.TrueString}}" />
+											</StackLayout>
+										</Grid>
+									</Grid>
+								</ControlTemplate>
+							</OnIdiom.Phone>
+
+							<OnIdiom.Tablet>
+								<ControlTemplate>
+									<Grid Margin="{TemplateBinding FixedMargin}" 
+										  Padding="{TemplateBinding FixedPadding}"
+									      BackgroundColor="{TemplateBinding BackgroundColor}">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+										<controls:ImageButton
+											x:Name="HamburgerButton"
+											IsVisible="{TemplateBinding HomeButtonCommand, Converter={StaticResource NullToBoolConverter}, ConverterParameter={x:Static x:Boolean.TrueString}}"
+											Grid.Column="0"
+											Style="{StaticResource ImageButtonThemedDark}"
+											Source="{resources:Image ContextMenu}"
+											Command="{TemplateBinding HomeButtonCommand}" />
+										<Grid Grid.Column="1" extensions:GestureExtensions.TapCommand="{TemplateBinding HeaderTapCommand}"
+										      BackgroundColor="{StaticResource PrimaryDarkColor}">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="*" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="*" />
+											</Grid.RowDefinitions>
+
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="*" />
+											</Grid.ColumnDefinitions>
+
+											<Image Grid.Column="0" Grid.RowSpan="4" VerticalOptions="Center" WidthRequest="38" HeightRequest="38"
+											       Source="{resources:Image ChevronLeft}"
+											       extensions:GestureExtensions.TapCommand="{TemplateBinding HeaderTapCommand}"
+											       IsVisible="{TemplateBinding IsChevronVisible}" />
+
+											<Label Grid.Column="1" Grid.Row="1" 
+												   Text="{TemplateBinding HeaderTextLine1, StringFormat='{}{0} '}"
+											       Style="{StaticResource LabelShellHeaderLine1}"
+											       IsVisible="{TemplateBinding HeaderTextLine1, Converter={StaticResource NullToBoolConverter}, ConverterParameter={x:Static x:Boolean.TrueString}}" />
+
+											<Label Grid.Column="1" Grid.Row="2" 
+												   Text="{TemplateBinding HeaderTextLine2, StringFormat='{}{0} '}"
+											       Style="{StaticResource LabelShellHeaderLine2}"
+											       IsVisible="{TemplateBinding HeaderTextLine2, Converter={StaticResource NullToBoolConverter}, ConverterParameter={x:Static x:Boolean.TrueString}}" />
+										</Grid>
+										<controls:EnhancedContentPresenter Grid.Column="2" Content="{TemplateBinding CommandAreaContent}" />
+									</Grid>
+								</ControlTemplate>
+							</OnIdiom.Tablet>
+						</OnIdiom>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<Style TargetType="{x:Type ContentView}" x:Key="ContentViewAccordionSublineContainer">
+				<Setter Property="Padding">
+					<Setter.Value>
+						<Thickness Left="{StaticResource DoubleDefaultThickness}" Top="{StaticResource DoubleDefaultThicknessHalfed}"
+						           Right="{StaticResource DoubleDefaultThicknessHalfed}"
+						           Bottom="{StaticResource DoubleDefaultThicknessHalfed}" />
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<Style TargetType="{x:Type ContentView}" x:Key="ContentViewTappableLabelInDrawer" BasedOn="{StaticResource ContentViewTappableLabel}" >
+				<Setter Property="BackgroundColor" Value="{StaticResource PrimaryDarkColor}" />
+			</Style>
+
+			<Style TargetType="{x:Type controls:EnhancedSwitch}">
+				<Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+				<Style.Setters>
+					<Setter Property="FixedPadding" Value="{StaticResource TappableThickness}" />
+					<Setter Property="ControlTemplate">
+						<Setter.Value>
+							<ControlTemplate>
+								<Grid Margin="{TemplateBinding FixedMargin}" Padding="{TemplateBinding FixedPadding}"
+								      BackgroundColor="{TemplateBinding BackgroundColor}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="Auto" />
+									</Grid.ColumnDefinitions>
+									<Label Grid.Column="0" Text="{TemplateBinding Text}" VerticalTextAlignment="Center" TextColor="{TemplateBinding TextColor}"
+									       Style="{TemplateBinding TextStyle}">
+										<Label.GestureRecognizers>
+											<TapGestureRecognizer Command="{TemplateBinding LabelTapCommand}"
+											                      CommandParameter="{Binding Source={x:Reference Switch}}" />
+										</Label.GestureRecognizers>
+									</Label>
+									<Switch VerticalOptions="CenterAndExpand" x:Name="Switch" Grid.Column="1" IsToggled="{TemplateBinding IsToggled}"
+									        BackgroundColor="{TemplateBinding BackgroundColor}"
+									        Style="{TemplateBinding SwitchStyle}" />
+								</Grid>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style.Setters>
+			</Style>
+
+			<Style TargetType="{x:Type custom:ApplicationHeaderFrame}">
+				<Setter Property="UseCompactModeOnMobile" Value="True" />
+				<Setter Property="IsHeaderVisible" Value="True" />
+				<Setter Property="ControlTemplate">
+					<Setter.Value>
+						<ControlTemplate>
+							<Grid Margin="{TemplateBinding FixedMargin}" Padding="{TemplateBinding FixedPadding}"
+							      BackgroundColor="{TemplateBinding BackgroundColor}">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="0" />
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+								
+								<custom:ApplicationHeader
+									IsVisible="{TemplateBinding IsHeaderVisible}"
+									IsChevronVisible="{TemplateBinding IsChevronVisible}"
+									CommandAreaContent="{TemplateBinding CommandAreaContent}"
+									PhoneCommandAreaContent="{TemplateBinding PhoneCommandAreaContent}"
+									UseCompactModeOnMobile="{TemplateBinding UseCompactModeOnMobile}"
+									HeaderTapCommand="{TemplateBinding HeaderTapCommand}"
+									HeaderTextLine1="{TemplateBinding HeaderTextTop}"
+									HeaderTextLine2="{TemplateBinding HeaderTextBottom}"
+									HomeButtonCommand="{TemplateBinding HomeButtonCommand}" />
+								<custom:WifiIndicator Grid.Row="1" />
+								<controls:ActivityIndicatorOverlay Grid.Row="2" IsBusy="{TemplateBinding IsBusy}">
+									<controls:ActivityIndicatorOverlay.ContentTemplate>
+										<controls:EnhancedContentPresenter BackgroundColor="{TemplateBinding BackgroundColor}" Grid.Row="1" Content="{TemplateBinding Content}" />
+									</controls:ActivityIndicatorOverlay.ContentTemplate>
+								</controls:ActivityIndicatorOverlay>
+								<Grid Row="1" Grid.RowSpan="2" IsVisible="{Binding Source={x:Static security:SecurityManagerProxy.Current}, Path=IsLoadingPermissions}" BackgroundColor="{x:Static resources:Colors.IconColor}">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*"></RowDefinition>
+										<RowDefinition Height="Auto"></RowDefinition>
+										<RowDefinition Height="10"></RowDefinition>
+										<RowDefinition Height="Auto"></RowDefinition>
+										<RowDefinition Height="*"></RowDefinition>
+									</Grid.RowDefinitions>
+									<Label Grid.Row="1" FontSize="{StaticResource FontSizeVeryLarge}" HorizontalTextAlignment="Center" 
+										   Text="{Binding Source={x:Static security:SecurityManagerProxy.Current}, Path=LoadProgressMessage}" 
+										   TextColor="{x:Static resources:Colors.PrimaryColor}"></Label>
+									<ActivityIndicator Grid.Row="3" IsRunning="True" IsVisible="True" Color="{x:Static resources:Colors.PrimaryColor}"></ActivityIndicator>
+								</Grid>
+							</Grid>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<Style TargetType="{x:Type controls:EnhancedDatePicker}">
+<!--				<Setter Property="MinimumDate" Value="{x:Static resources:Constants.MinDate}" />-->
+				<Setter Property="TextColor" Value="{StaticResource PrimaryDarkColor}" />
+				<Setter Property="BackgroundColor" Value="Transparent" />
+				<Setter Property="ControlTemplate">
+					<Setter.Value>
+						<ControlTemplate>
+							<Grid Margin="{TemplateBinding FixedMargin}" Padding="{TemplateBinding FixedPadding}"
+							      BackgroundColor="{TemplateBinding BackgroundColor}"
+							      MinimumWidthRequest="{TemplateBinding MinimumWidthRequest}"
+							      WidthRequest="{TemplateBinding WidthRequest}" x:Name="ParentGrid">
+
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="48" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<controls:ExtendedLabel
+									Text="{TemplateBinding SelectedDate, Converter={StaticResource DateConverter}, Mode=TwoWay}"
+									Style="{StaticResource ValueDateFieldItem}"
+									TouchCommand="{TemplateBinding TouchCommand}"
+									TouchCommandParameter="{x:Reference DatePickerController}"
+									BackgroundColor="Transparent"
+									IsUnderline="True"
+									UsePlaceholder="True"
+									Placeholder="___.___._____" />
+
+								<controls:ImageButton Grid.Column="1"
+								                      Source="{resources:Image ClearReflectHorizontal}"
+								                      Command="{TemplateBinding ClearInputCommand}"
+								                      HeightRequest="32"
+								                      WidthRequest="48"
+								                      ImageHeightRequest="32"
+								                      ImageWidthRequest="32"
+								                      Margin="0"
+								                      BorderWidth="0"
+								                      IsVisible="{TemplateBinding DisplayRemoveIcon}"
+								                      BackgroundColor="Transparent" />
+
+								<controls:DatePickerController Grid.Column="2" x:Name="DatePickerController"
+								                               MinimumDate="{TemplateBinding MinimumDate}"
+								                               MaximumDate="{TemplateBinding MaximumDate}"
+								                               TextColor="{TemplateBinding TextColor}"
+								                               SelectedDate="{TemplateBinding SelectedDate, Mode=TwoWay}" />
+							</Grid>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<Style TargetType="{x:Type controls:AccordionElementLabel}">
+				<Setter Property="IsIconVisible" Value="True"></Setter>
+				<Setter Property="LabelStyle" Value="{StaticResource LabelDrawerListHeader}"></Setter>
+				<Setter Property="IconSource" Value="{resources:Image Expand}"></Setter>
+				<Setter Property="ControlTemplate">
+					<Setter.Value>
+						<ControlTemplate>
+							<Grid BackgroundColor="Transparent">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"></ColumnDefinition>
+									<ColumnDefinition Width="Auto"></ColumnDefinition>
+								</Grid.ColumnDefinitions>
+
+								<controls:EnhancedLabel Style="{TemplateBinding LabelStyle}" Text="{TemplateBinding LabelText}"></controls:EnhancedLabel>
+								<Image IsVisible="{TemplateBinding IsIconVisible}" Grid.Column="1" Source="{TemplateBinding IconSource}" MinimumHeightRequest="24" WidthRequest="24"></Image>
+							</Grid>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<Style TargetType="{x:Type controls:Accordion}">
+				<Setter Property="RowSpacing" Value="0"></Setter>
+				<Setter Property="ColumnSpacing" Value="0"></Setter>
+			</Style>
+
+			<Style TargetType="{x:Type controls:AccordionElement}">
+				<Setter Property="ControlTemplate">
+					<Setter.Value>
+						<ControlTemplate>
+							<Grid IsVisible="{TemplateBinding IsElementVisible}" BackgroundColor="{TemplateBinding BackgroundColor}" RowSpacing="0">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto"></RowDefinition>
+									<RowDefinition Height="Auto"></RowDefinition>
+									<RowDefinition Height="*"></RowDefinition>
+								</Grid.RowDefinitions>
+								
+								<controls:EnhancedContentPresenter Grid.Row="0" Content="{TemplateBinding HeaderTemplate}" />
+
+								<controls:EnhancedContentPresenter Grid.Row="1" Content="{TemplateBinding HeaderSublineTemplate}" 
+																   IsVisible="{TemplateBinding IsExpanded, Converter={StaticResource BooleanInversionConverter}}" />
+
+								<controls:EnhancedContentPresenter Grid.Row="2" Content="{TemplateBinding ContentTemplate}" 
+																   IsVisible="{TemplateBinding IsExpanded}" />
+							</Grid>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>

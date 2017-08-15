@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ProjectActionOverview_Logout" xml:space="preserve">
+    <value>Ausloggen</value>
+  </data>
+  <data name="ProjectActionOverview_Project" xml:space="preserve">
+    <value>Projektauswahl</value>
+  </data>
+  <data name="ProjectActionOverview_ProjectStructure" xml:space="preserve">
+    <value>Standortauswahl</value>
+  </data>
+  <data name="ProjectActionOverview_Search" xml:space="preserve">
+    <value>Suche</value>
+  </data>
+  <data name="ProjectActionOverview_Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="ProjectActionOverview_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ProjectActionOverview_Tasks" xml:space="preserve">
+    <value>Vorfälle / Aufgaben</value>
+  </data>
+  <data name="SearchView_DisplayInactive" xml:space="preserve">
+    <value>Inaktive anzeigen</value>
+  </data>
+  <data name="SearchView_DisplayWbs" xml:space="preserve">
+    <value>WBS-Elemente anzeigen</value>
+  </data>
+  <data name="Shared_ChangeView" xml:space="preserve">
+    <value>Ansicht wechseln</value>
+  </data>
+  <data name="Shared_Dates" xml:space="preserve">
+    <value>Termine</value>
+  </data>
+  <data name="Shared_Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Shared_InfoFields" xml:space="preserve">
+    <value>Informationsfelder</value>
+  </data>
+  <data name="Shared_MainMenu" xml:space="preserve">
+    <value>Hauptmenü</value>
+  </data>
+  <data name="Shared_ProjectStructureSingular" xml:space="preserve">
+    <value>Standort</value>
+  </data>
+  <data name="Shared_Search" xml:space="preserve">
+    <value>Suche</value>
+  </data>
+  <data name="Shared_ServiceProgramSingular" xml:space="preserve">
+    <value>Serviceprogram</value>
+  </data>
+  <data name="Shared_Tasks" xml:space="preserve">
+    <value>Aufgaben</value>
+  </data>
+  <data name="Shared_CreateNewAccount" xml:space="preserve">
+    <value>Neues Konto anlegen</value>
+  </data>
+  <data name="Shared_Create" xml:space="preserve">
+    <value>Anlegen</value>
+  </data>
+  <data name="AccountModification_NewAccount" xml:space="preserve">
+    <value>Neuer Account</value>
+  </data>
+  <data name="Shared_NavigateTo" xml:space="preserve">
+    <value>Navigiere zu</value>
+  </data>
+  <data name="Shared_DateFields" xml:space="preserve">
+    <value>Terminplanfelder</value>
+  </data>
+  <data name="Shared_Question" xml:space="preserve">
+    <value>Frage</value>
+  </data>
+  <data name="Shared_ConfirmRemoteLoad" xml:space="preserve">
+    <value>Sollen Serverdaten mit in die Suche mit einbezogen werden?</value>
+  </data>
+  <data name="Shared_Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="Shared_No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="Shared_Error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="Shared_Abort" xml:space="preserve">
+    <value>Abbruch</value>
+  </data>
+  <data name="Shared_NoChildElementsAvailable" xml:space="preserve">
+    <value>Keine Kindelemente verfügbar</value>
+  </data>
+  <data name="Shared_ProjectCannotBeFound" xml:space="preserve">
+    <value>Projekt konnte nicht gefunden werden</value>
+  </data>
+  <data name="Shared_ProjectSelection" xml:space="preserve">
+    <value>Projektauswahl</value>
+  </data>
+  <data name="Shared_BackToOverview" xml:space="preserve">
+    <value>Zurück zur Übersicht</value>
+  </data>
+  <data name="Shared_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="ProjectActionOverview_LoadInProgress" xml:space="preserve">
+    <value>Projekt wird geladen</value>
+  </data>
+  <data name="ProjectActionOverview_UnknownAction" xml:space="preserve">
+    <value>Unbekannte aktion</value>
+  </data>
+  <data name="Shared_Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Shared_Discard" xml:space="preserve">
+    <value>Verwerfen</value>
+  </data>
+  <data name="Shared_SaveChangesConfirmation" xml:space="preserve">
+    <value>Änderungen speichern?</value>
+  </data>
+  <data name="Shared_LoadingServiceProgram" xml:space="preserve">
+    <value>Serviceprogram wird geladen</value>
+  </data>
+  <data name="Shared_LoadingEntitiesFailed" xml:space="preserve">
+    <value>Fehler beim laden von "{0}" {1}</value>
+  </data>
+  <data name="Shared_FieldDefinitions" xml:space="preserve">
+    <value>Felddefinitionen</value>
+  </data>
+  <data name="Shared_FieldValues" xml:space="preserve">
+    <value>Felddaten</value>
+  </data>
+  <data name="Shared_AreYouSure" xml:space="preserve">
+    <value>Wirklich fortfahren?</value>
+  </data>
+  <data name="Shared_Note" xml:space="preserve">
+    <value>Hinweis</value>
+  </data>
+  <data name="Shared_UserName" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="Shared_Password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Shared_ApiUrl" xml:space="preserve">
+    <value>Api URL</value>
+  </data>
+  <data name="Shared_TheFollowingInputsAreMissing" xml:space="preserve">
+    <value>Die folgenden Benutzereingaben fehlen: {0}</value>
+  </data>
+  <data name="Shared_Domain" xml:space="preserve">
+    <value>Domäne</value>
+  </data>
+  <data name="AccountModification_ApiConnectionError" xml:space="preserve">
+    <value>Verbindungsfehler zur API</value>
+  </data>
+  <data name="Shared_More" xml:space="preserve">
+    <value>Mehr</value>
+  </data>
+  <data name="Shared_ToOverview" xml:space="preserve">
+    <value>Zur Übersicht</value>
+  </data>
+  <data name="Shared_SavingSucceeded" xml:space="preserve">
+    <value>Speichern erfolgreich</value>
+  </data>
+  <data name="AccountModification_ThisAccountAlreadyExists" xml:space="preserve">
+    <value>Dieses Benutzerkonto existiert bereits</value>
+  </data>
+  <data name="Shared_SavingFailed" xml:space="preserve">
+    <value>Speichern fehlgeschlagen</value>
+  </data>
+  <data name="Shared_AccountOverview" xml:space="preserve">
+    <value>Accountübersicht</value>
+  </data>
+  <data name="Shared_ProjectOverview" xml:space="preserve">
+    <value>Projektübersicht</value>
+  </data>
+  <data name="Shared_CommonInformation" xml:space="preserve">
+    <value>Informationen</value>
+  </data>
+  <data name="Shared_NoServiceProgramAvailable" xml:space="preserve">
+    <value>Kein Serviceprogramm vorhanden</value>
+  </data>
+  <data name="AppSettingsView_UseSynchronization" xml:space="preserve">
+    <value>Synchronisierung verwenden</value>
+  </data>
+  <data name="Shared_NoDataToDisplay" xml:space="preserve">
+    <value>Es sind keine anzeigbaren Daten vorhanden.</value>
+  </data>
+  <data name="AccountModification_NoMatchingAccountFound" xml:space="preserve">
+    <value>Es konnte kein Account gefunden werden, der aktualisiert werden kann.</value>
+  </data>
+  <data name="ProjectActionOverview_LoggedInAs" xml:space="preserve">
+    <value>Eingeloggt als</value>
+  </data>
+  <data name="ProjectActionOverview_ProjectMustBeSelected" xml:space="preserve">
+    <value>Ein Projekt muss ausgewählt werden.</value>
+  </data>
+  <data name="Shared_SomeConstraintsAreNotSatisfied" xml:space="preserve">
+    <value>Nicht alle Feldwerte erfüllen die Validierungsregeln</value>
+  </data>
+  <data name="Shared_UrlCouldNotBeOpened_0" xml:space="preserve">
+    <value>Die Url "{0}" konnte nicht geöffnet werden.</value>
+  </data>
+  <data name="Shared_OpenReport" xml:space="preserve">
+    <value>Bericht öffnen</value>
+  </data>
+  <data name="Shared_QuickAction" xml:space="preserve">
+    <value>Schnellauswahl</value>
+  </data>
+  <data name="Shared_Close" xml:space="preserve">
+    <value>Schliessen</value>
+  </data>
+  <data name="Shared_TraceView" xml:space="preserve">
+    <value>Anwendungslog</value>
+  </data>
+  <data name="Shared_ChangeSettings" xml:space="preserve">
+    <value>Einstellungen bearbeiten</value>
+  </data>
+  <data name="Shared_AskForTelemetryPermission" xml:space="preserve">
+    <value>Wollen Sie anonyme Telemetriedaten übertragen, die zur Verbesserung der Anwendung beitragen?</value>
+  </data>
+  <data name="Shared_ClipboardUpdated" xml:space="preserve">
+    <value>Zwischenablage aktualisiert.</value>
+  </data>
+  <data name="Shared_Done" xml:space="preserve">
+    <value>Fertig</value>
+  </data>
+  <data name="Shared_Comment" xml:space="preserve">
+    <value>Kommentar</value>
+  </data>
+  <data name="Shared_LoadingPermissions_0_1" xml:space="preserve">
+    <value>Berechtigungen werden geladen ... {0} / {1}</value>
+  </data>
+  <data name="Shared_PermissionsHaveChangedSinceLastLaunch" xml:space="preserve">
+    <value>Die Berechtigungen haben sich seit dem letzten Anwendungsstart verändert.</value>
+  </data>
+  <data name="GlobalSettingsView_TransmitTelemetryData" xml:space="preserve">
+    <value>Telemetriedaten übertragen?</value>
+  </data>
+  <data name="GlobalSettingsView_CollectDebugTracing" xml:space="preserve">
+    <value>Trace Informationen sammeln?</value>
+  </data>
+  <data name="Shared_PotentiallyInvalidApiEndpointConfigurationDetectedQuestion" xml:space="preserve">
+    <value>Ein API-Fehler ist aufgetreten, der auf unabsichtlicher Verwendung des HTTP-Protokolls basiert. Soll das Protokoll des Accounts auf HTTPS umgestellt werden?</value>
+  </data>
+  <data name="SecurityManagerProxy_ErrorWhileLoadingPermissions" xml:space="preserve">
+    <value>Beim Laden der Berechtigungen ist ein Fehler aufgetreten. Bitte überprüfen Sie die Login Daten</value>
+  </data>
+  <data name="SearchView_MessageNoResults" xml:space="preserve">
+    <value>Es wurden keine Suchergebnisse gefunden</value>
+  </data>
+  <data name="Shared_ValidationErrors" xml:space="preserve">
+    <value>Validierungsfehler</value>
+  </data>
+  <data name="Shared_InsufficientPermissions" xml:space="preserve">
+    <value>Die Berechtigungen sind unzureichend.</value>
+  </data>
+  <data name="Shared_NoReportAssigned" xml:space="preserve">
+    <value>Es wurde kein Bericht zugewiesen.</value>
+  </data>
+</root>

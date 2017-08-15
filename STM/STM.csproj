@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3C2D81A2-CF77-4149-B48C-DFCE91C06257}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>STM</RootNamespace>
+    <AssemblyName>STM</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <XccRemoveIgnorableContent>True</XccRemoveIgnorableContent>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Colors.cs" />
+    <Compile Include="Resources\Constants.cs" />
+    <Compile Include="Resources\GlobalCommands.cs" />
+    <Compile Include="Resources\Images.cs" />
+    <Compile Include="Resources\Translations.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Translations.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Translations.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Translations.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Translations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\ST5Trunk\Solvum.SiteTracker.Business.Shared.Logic\Solvum.SiteTracker.Business.Shared.Logic.csproj">
+      <Project>{c0b91929-288d-47a7-a154-95f3a3e1ad7b}</Project>
+      <Name>Solvum.SiteTracker.Business.Shared.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ST5Trunk\Solvum.SiteTracker.Business.Shared\Solvum.SiteTracker.Business.Shared.csproj">
+      <Project>{014ebb96-eb27-446b-94ab-8c8168bdec08}</Project>
+      <Name>Solvum.SiteTracker.Business.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ST5Trunk\Solvum.SiteTracker.Mobile.Api.Reader.Common\Solvum.SiteTracker.Mobile.Api.Reader.Common.csproj">
+      <Project>{b5a605ac-67cf-425b-ac13-0b6ad3227508}</Project>
+      <Name>Solvum.SiteTracker.Mobile.Api.Reader.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ST5Trunk\Solvum.SiteTracker.Mobile.Api\Solvum.SiteTracker.Mobile.Api.csproj">
+      <Project>{fa56b81e-596b-486a-ac6c-97fa2af03f2e}</Project>
+      <Name>Solvum.SiteTracker.Mobile.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Solvum.SiteTracker.Mobile.Api.Reader\Solvum.SiteTracker.Mobile.Api.Reader.csproj">
+      <Project>{c7ef88f7-8316-4e83-90d1-7547f795ada1}</Project>
+      <Name>Solvum.SiteTracker.Mobile.Api.Reader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Solvum.SiteTracker.Mobile.Lib\Solvum.SiteTracker.Mobile.Lib.csproj">
+      <Project>{bb523269-4f00-4707-b4cf-8fe5fa46475f}</Project>
+      <Name>Solvum.SiteTracker.Mobile.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
